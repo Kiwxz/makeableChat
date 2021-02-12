@@ -85,9 +85,9 @@
 			isa = PBXGroup;
 			children = (
 				664AED6E25D6569800275619 /* Application */,
-				664AED7125D656BC00275619 /* Resources */,
 				664AED7025D656B500275619 /* Controllers */,
 				664AED6F25D656A900275619 /* Storyboards */,
+				664AED7125D656BC00275619 /* Resources */,
 			);
 			path = MakeableChat;
 			sourceTree = "<group>";

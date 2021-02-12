@@ -9,21 +9,26 @@ class ChatViewController: JSQMessagesViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        senderId = "1010"
+        
+        // Current user information
+        senderId = "1234"
         senderDisplayName = "Kirsten"
+        
         setupBubbles()
         automaticallyScrollsToMostRecentMessage = true
-        
-        messages.append(JSQMessage(senderId: "1011", displayName: "Bruger 2", text: "Testbesked fra bruger 2"))
-        messages.append(JSQMessage(senderId: "1012", displayName: "Bruger 3", text: "Testbesked fra bruger 3"))
+  
+        // Testdata
+        DbConstants.dbChats.childByAutoId().setValue(["senderId": "2345", "senderDisplayName": "Bob", "messageContent": "Hello there!"])
+        DbConstants.dbChats.childByAutoId().setValue(["senderId": "3456", "senderDisplayName": "Alice", "messageContent": "Testmessage from another user"])
         
         // Sets the avatar viewSize to zero
         inputToolbar.contentView.leftBarButtonItem = nil
         collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
-        let query = DbConstants.dbChats.queryLimited(toLast: 5)
-        // Firebase observes query for changes.
+        let query = DbConstants.dbChats.queryLimited(toLast: 25)
+        
+        // Firebase observes query for changes
         _ = query.observe(.childAdded, with: {snapshot in
             if let dictionary = snapshot.value as? [String: String],
                let id   = dictionary["senderId"],
@@ -42,6 +47,14 @@ class ChatViewController: JSQMessagesViewController {
         incomingBubbleImageView = bubbleFactory?.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
     }
     
+    // Creates reference to chats, adds dictionary of messages to Firebase
+    override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
+        let dbRef = DbConstants.dbChats.childByAutoId()
+        let message = ["senderId": senderId, "senderDisplayName": senderDisplayName, "messageContent": text]
+        dbRef.setValue(message)
+        finishSendingMessage()
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
     }
@@ -54,7 +67,6 @@ class ChatViewController: JSQMessagesViewController {
         return messages[indexPath.item].senderId == senderId ? outgoingBubbleImageView : incomingBubbleImageView
     }
     
-    
     // Hides avatars for message bubbles
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         return nil
@@ -65,11 +77,7 @@ class ChatViewController: JSQMessagesViewController {
         return messages[indexPath.item].senderId == senderId ? nil : NSAttributedString(string: messages[indexPath.item].senderDisplayName)
     }
     
-    // Creates reference to chats, adds dictionary of messages to Firebase
-    override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-        let dbRef = DbConstants.dbChats.childByAutoId()
-        let message = ["senderId": senderId, "senderDisplayName": senderDisplayName, "messageContent": text]
-        dbRef.setValue(message)
-        finishSendingMessage()
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
+        return messages[indexPath.item].senderId == senderId ? CGFloat(0.0) : kJSQMessagesCollectionViewCellLabelHeightDefault
     }
 }
