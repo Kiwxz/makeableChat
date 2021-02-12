@@ -1,0 +1,6 @@
+framework module Pods_MakeableChat {
+  umbrella header "Pods-MakeableChat-umbrella.h"
+
+  export *
+  module * { export * }
+}

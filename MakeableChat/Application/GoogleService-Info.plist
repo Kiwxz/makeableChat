@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>30006962139-7lvboe01lg6k0567i1fen4lijcv1q3rn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.30006962139-7lvboe01lg6k0567i1fen4lijcv1q3rn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyByAFr7x840haaFbijfkbeqyi557KZJD3o</string>
+	<key>GCM_SENDER_ID</key>
+	<string>30006962139</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Kiwxz.MakeableChat</string>
+	<key>PROJECT_ID</key>
+	<string>makeablechat-3ea75</string>
+	<key>STORAGE_BUCKET</key>
+	<string>makeablechat-3ea75.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:30006962139:ios:8047934942b599c00ea9fe</string>
+</dict>
+</plist>
